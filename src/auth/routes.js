@@ -28,6 +28,13 @@ authRouter.post('/signin', basicAuth, (req, res, next) => {
   };
   res.status(200).json(user);
 });
+authRouter.post('/signinI', bearerAuth, (req, res, next) => {
+  const user = {
+    user: req.user,
+    token: req.user.token
+  };
+  res.status(200).json(user);
+});
 
 authRouter.get('/users', bearerAuth, permissions('delete'), async (req, res, next) => {
   const userRecords = await users.findAll({});
